@@ -1,0 +1,7 @@
+wappalyzer
+flask 
+json
+groq
+ollama
+request
+flask_sqlalchemy
