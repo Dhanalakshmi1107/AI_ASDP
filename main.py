@@ -88,7 +88,6 @@ def run_whatweb(target):
 
         technologies = []
 
-        # simple parsing (can improve later)
         if "Apache" in output:
             technologies.append("Apache")
         if "nginx" in output:
@@ -103,7 +102,91 @@ def run_whatweb(target):
     except Exception as e:
         print("WhatWeb error:", e)
         return []
-    
+
+def run_sslscan(target, manager):
+    print("[*] Running SSLScan (fallback mode)...")
+
+    cmd = ["sslscan", f"{target}:443"]
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    output = result.stdout
+
+    host = manager.get_or_create_host(target)
+
+    supported = []
+    weak = []
+
+    if "TLSv1.0" in output:
+        weak.append("TLSv1.0")
+        supported.append("TLSv1.0")
+
+    if "TLSv1.1" in output:
+        supported.append("TLSv1.1")
+
+    if "TLSv1.2" in output:
+        supported.append("TLSv1.2")
+
+    if "TLSv1.3" in output:
+        supported.append("TLSv1.3")
+
+    host["tls"] = {
+        "supported_versions": list(set(supported)),
+        "weak_protocols": weak
+    }
+
+def run_wafwoof(target, manager):
+    print("[*] Running WafW00f...")
+
+    cmd = ["wafw00f", target]
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    host = manager.get_or_create_host(manager.data["hosts"][0]["hostname"])
+
+    if "No WAF detected" in result.stdout:
+        host["waf"] = {
+            "detected": False
+        }
+    else:
+        host["waf"] = {
+            "detected": True,
+            "name": result.stdout.strip()
+        }
+
+def run_wappalyzer(target, manager):
+    print("[*] Running Wappalyzer...")
+
+    try:
+        from Wappalyzer import Wappalyzer, WebPage
+
+        url = f"http://{target}/"
+        wappalyzer = Wappalyzer.latest()
+        webpage = WebPage.new_from_url(url)
+        results = wappalyzer.analyze_with_versions(webpage)
+
+        host = manager.get_or_create_host(target)
+
+        tech_list = []
+
+        for tech, versions in results.items():
+            version = None
+
+            if isinstance(versions, list) and versions:
+                version = versions[0]
+
+            tech_list.append({
+                "name": tech,
+                "version": version
+            })
+
+        host["web_stack"] = {
+            "technologies": tech_list
+        }
+
+    except Exception as e:
+        print("[!] Wappalyzer failed:", e)
+
 def generate_cve_and_insights(technologies, findings):
     cves = []
     insights = []

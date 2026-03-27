@@ -1,16 +1,42 @@
-# React + Vite
+# AI_ASDP Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This frontend is the React + Vite dashboard for AI_ASDP.
 
-Currently, two official plugins are available:
+## What It Does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Accepts a target domain from the user
+- Sends a scan request to the Flask backend at `POST /start-scan`
+- Shows scan progress in the left panel
+- Renders scan results in the right panel
+- Stores the latest scan result and recent scan history in `localStorage`
 
-## React Compiler
+## UI Layout
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Left panel:
+  - scan form
+  - scan progress
+  - recent scans
+- Right panel:
+  - dashboard results
+  - metrics cards
+  - findings table
+  - AI insights
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+npm run build
+```
+
+## Tech
+
+- React
+- Vite
+- Tailwind CSS
+
+## Notes
+
+- The frontend now uses a single-page layout.
+- Results appear on the same page after a scan completes.
