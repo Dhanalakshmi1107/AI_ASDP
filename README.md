@@ -288,3 +288,9 @@ AIASDP/
 **Two-tier critic design**: The deterministic critic runs in milliseconds with zero token cost and eliminates the obvious rejections (wrong port, wrong tech stack, unverifiable preconditions). The LLM critic runs on survivors only, using a different model tier from Stage 1 to avoid shared blind spots. This design saves tokens and catches both rule-checkable and semantically-invalid proposals.
 
 **Precondition grounding**: A passive nmap+Wappalyzer scan cannot confirm whether a login form exists, whether SSH password auth is enabled, or whether a web app uses a MongoDB backend. Surfacing attacks as `confirmed` when their preconditions are unverifiable misleads analysts. The deterministic critic now explicitly distinguishes between "tech definitely absent" (reject) and "precondition unverifiable from passive scan" (needs_manual_check with a specific reason).
+
+---
+
+This project is provided for educational and research purposes only and should not be used for any commercial, malicious, or unauthorized activities.
+
+---
