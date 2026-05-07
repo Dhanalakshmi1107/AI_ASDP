@@ -1,7 +1,6 @@
 {
   "target": "example.com",
   "scan_timestamp": "ISO_TIMESTAMP",
-
   "subdomains": [
     {
       "name": "api.example.com",
@@ -9,37 +8,41 @@
       "status": "active"
     }
   ],
-
   "hosts": [
     {
       "hostname": "api.example.com",
       "ip": "1.2.3.4",
-
       "waf": {
         "detected": true,
         "name": "Cloudflare"
       },
-
+      "http": {
+        "status_code": 200,
+        "headers": [
+          {
+            "name": "server",
+            "value": "nginx"
+          }
+        ]
+      },
       "services": [
         {
           "port": 443,
           "protocol": "tcp",
           "status": "open",
-
           "service_name": "https",
           "product": "nginx",
           "version": "1.18.0",
-
           "scripts": [
             {
               "script_id": "ssl-cert",
               "summary": "Certificate expired"
             }
           ],
-
           "cve_matches": [
             {
               "cve_id": "CVE-2021-23017",
+              "description": "Nginx resolver off-by-one vulnerability.",
               "severity": "HIGH",
               "cvss_score": 7.8,
               "confidence": "medium"
@@ -47,14 +50,12 @@
           ]
         }
       ],
-
       "tls": {
         "supported_versions": ["TLSv1.0", "TLSv1.2"],
         "weak_protocols": ["TLSv1.0"],
         "weak_ciphers": ["TLS_RSA_WITH_3DES_EDE_CBC_SHA"],
         "certificate_expired": false
       },
-
       "web_stack": {
         "server": {
           "name": "Apache",
@@ -63,10 +64,24 @@
         "technologies": [
           {
             "name": "PHP",
-            "version": "7.4.3"
+            "version": "7.4.3",
+            "category": "language"
           }
         ]
       }
     }
-  ]
+  ],
+  "ai_analysis": {
+    "summary": "Internet-facing services and web technologies were identified.",
+    "risks": [
+      {
+        "title": "Weak TLS support",
+        "level": "MEDIUM",
+        "details": "The host accepts legacy TLS versions."
+      }
+    ],
+    "recommendations": [
+      "Disable deprecated TLS versions and review exposed services."
+    ]
+  }
 }

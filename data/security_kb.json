@@ -1,0 +1,109 @@
+{
+  "entries": [
+    {
+      "id": "kb_tls_disable_legacy",
+      "topic": "Disable TLSv1.0 and TLSv1.1",
+      "category": "tls",
+      "severity": "HIGH",
+      "text": "TLSv1.0 and TLSv1.1 are deprecated protocols vulnerable to attacks such as POODLE and BEAST. Disable them in your web server config. For nginx add 'ssl_protocols TLSv1.2 TLSv1.3;' in the server block. For Apache set 'SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1'."
+    },
+    {
+      "id": "kb_tls_sweet32",
+      "topic": "Remediate SWEET32 — 3DES cipher",
+      "category": "tls",
+      "severity": "MEDIUM",
+      "text": "The SWEET32 attack exploits 64-bit block ciphers including 3DES. Remove TLS_RSA_WITH_3DES_EDE_CBC_SHA from your cipher suite. For nginx set ssl_ciphers to exclude 3DES. For Apache use SSLCipherSuite with !3DES."
+    },
+    {
+      "id": "kb_nginx_version_disclosure",
+      "topic": "nginx version disclosure and hardening",
+      "category": "disclosure",
+      "severity": "LOW",
+      "text": "Exposing the nginx version in Server headers aids attackers in targeting known CVEs. Add 'server_tokens off;' in nginx.conf. Also review the X-Powered-By header and remove it if present."
+    },
+    {
+      "id": "kb_apache_cve_2021_41773",
+      "topic": "Apache httpd CVE-2021-41773 path traversal",
+      "category": "web",
+      "severity": "HIGH",
+      "text": "CVE-2021-41773 allows unauthenticated path traversal on Apache 2.4.49. Upgrade immediately to 2.4.51 or later. Ensure 'require all denied' is set for filesystem paths outside the document root."
+    },
+    {
+      "id": "kb_exposed_admin",
+      "topic": "Exposed admin panels",
+      "category": "web",
+      "severity": "HIGH",
+      "text": "Publicly accessible admin interfaces expose management functions to the internet. Restrict access by IP using firewall rules or web server ACLs. Enable MFA on all admin accounts and log all access attempts."
+    },
+    {
+      "id": "kb_http_security_headers",
+      "topic": "HTTP security headers",
+      "category": "web",
+      "severity": "MEDIUM",
+      "text": "Missing security headers increase exposure to XSS, clickjacking, and MIME sniffing attacks. Add Content-Security-Policy, Strict-Transport-Security, X-Frame-Options: DENY, and X-Content-Type-Options: nosniff to all responses."
+    },
+    {
+      "id": "kb_subdomain_takeover",
+      "topic": "Subdomain takeover risk",
+      "category": "web",
+      "severity": "HIGH",
+      "text": "Dangling DNS records pointing to deprovisioned cloud services allow attackers to claim the subdomain. Audit all CNAME records regularly. Remove DNS entries for services that no longer exist."
+    },
+    {
+      "id": "kb_open_redirect",
+      "topic": "Open redirect vulnerabilities",
+      "category": "web",
+      "severity": "MEDIUM",
+      "text": "Open redirects allow attackers to craft URLs that appear legitimate but redirect users to malicious sites. Validate all redirect targets against an allowlist of trusted domains. Never use user-supplied input as a redirect destination without validation."
+    },
+    {
+      "id": "kb_cert_expiry",
+      "topic": "Certificate expiry monitoring",
+      "category": "tls",
+      "severity": "MEDIUM",
+      "text": "Expired TLS certificates cause browser warnings that erode user trust and can indicate neglected infrastructure. Use automated certificate management such as Let's Encrypt with auto-renewal. Alert at 30 and 7 days before expiry."
+    },
+    {
+      "id": "kb_ssh_default_creds",
+      "topic": "SSH default credentials",
+      "category": "auth",
+      "severity": "CRITICAL",
+      "text": "Default or weak SSH credentials are the most common initial access vector. Disable password authentication and require key-based auth. Set PermitRootLogin no in sshd_config. Use fail2ban or equivalent to block brute force attempts."
+    },
+    {
+      "id": "kb_exposed_git",
+      "topic": "Exposed .git directories",
+      "category": "disclosure",
+      "severity": "HIGH",
+      "text": "A publicly accessible .git directory exposes source code, commit history, and potentially secrets. Block access in your web server config with a location block denying /.git. Rotate any secrets found in commit history."
+    },
+    {
+      "id": "kb_wordpress_version",
+      "topic": "WordPress version exposure",
+      "category": "disclosure",
+      "severity": "LOW",
+      "text": "WordPress version information in meta tags and readme.html helps attackers target known vulnerabilities. Remove readme.html, suppress the generator meta tag, and keep core, plugins, and themes updated."
+    },
+    {
+      "id": "kb_php_version",
+      "topic": "PHP version disclosure",
+      "category": "disclosure",
+      "severity": "LOW",
+      "text": "The X-Powered-By header often reveals the PHP version. Set expose_php = Off in php.ini and remove or override the X-Powered-By header in your web server config."
+    },
+    {
+      "id": "kb_sqli_error",
+      "topic": "SQL injection via error messages",
+      "category": "web",
+      "severity": "HIGH",
+      "text": "Verbose database error messages reveal schema information that aids SQL injection attacks. Disable detailed error output in production. Use parameterised queries or prepared statements in all database interactions."
+    },
+    {
+      "id": "kb_directory_listing",
+      "topic": "Directory listing enabled",
+      "category": "web",
+      "severity": "MEDIUM",
+      "text": "Enabled directory listing exposes file structure and potentially sensitive files to unauthenticated users. Disable it with 'Options -Indexes' in Apache or 'autoindex off;' in nginx. Audit exposed directories immediately."
+    }
+  ]
+}

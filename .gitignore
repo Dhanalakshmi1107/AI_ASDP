@@ -1,0 +1,42 @@
+# --- Secrets ---
+.env
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+*.so
+
+# --- Virtual environment ---
+myvenv/
+venv/
+.venv/
+env/
+
+# --- Node ---
+frontend/node_modules/
+frontend/dist/
+
+# --- Runtime data (auto-created) ---
+data/scan_history.db
+cache/cve_cache.json
+logs/
+
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# --- Claude Code session files ---
+.claude/

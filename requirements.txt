@@ -1,7 +1,7 @@
-wappalyzer
-flask 
-json
+Flask
+flask-cors
 groq
-ollama
-request
-flask_sqlalchemy
+wappalyzer
+requests
+rank-bm25
+publicsuffix2

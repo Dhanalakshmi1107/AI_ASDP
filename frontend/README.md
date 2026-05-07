@@ -1,14 +1,22 @@
 # AI_ASDP Frontend
 
-This frontend is the React + Vite dashboard for AI_ASDP.
+This frontend is the single-page React + Vite dashboard for AI_ASDP.
 
-## What It Does
+## What It Displays
 
-- Accepts a target domain from the user
-- Sends a scan request to the Flask backend at `POST /start-scan`
-- Shows scan progress in the left panel
-- Renders scan results in the right panel
-- Stores the latest scan result and recent scan history in `localStorage`
+The dashboard consumes the schema-driven backend response and displays:
+
+- target and scan timestamp
+- recent scans
+- subdomain count
+- discovered service count
+- detected technologies
+- mapped CVEs
+- subdomains list
+- technologies list
+- host overview
+- findings table with CVEs per service
+- AI analysis summary, risks, and recommendations
 
 ## UI Layout
 
@@ -17,10 +25,20 @@ This frontend is the React + Vite dashboard for AI_ASDP.
   - scan progress
   - recent scans
 - Right panel:
-  - dashboard results
-  - metrics cards
-  - findings table
-  - AI insights
+  - scan results
+  - cards
+  - technologies
+  - CVE summary
+  - findings
+  - AI analysis
+
+## Frontend Data Flow
+
+1. User enters a target and starts a scan.
+2. Frontend sends `POST /start-scan` to the Flask backend.
+3. Backend returns a schema-valid JSON response.
+4. Frontend stores the latest result in `localStorage`.
+5. Dashboard updates on the same page without navigation.
 
 ## Scripts
 
@@ -38,5 +56,7 @@ npm run build
 
 ## Notes
 
-- The frontend now uses a single-page layout.
-- Results appear on the same page after a scan completes.
+- The frontend uses a single-page split layout.
+- Tailwind is integrated through the Vite plugin.
+- The browser tab title is `AI_ASDP`.
+- The dashboard expects the backend to follow `Master_Recon_Schema.json`.

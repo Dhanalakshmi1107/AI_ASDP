@@ -1,0 +1,49 @@
+{
+  "entries": [
+    {
+      "keywords": ["ssh", "openssh"],
+      "port": 22,
+      "cve_id": "CVE-2024-6387",
+      "description": "OpenSSH signal handler race condition vulnerability.",
+      "severity": "HIGH",
+      "cvss_score": 8.1,
+      "confidence": "medium"
+    },
+    {
+      "keywords": ["nginx"],
+      "port": 80,
+      "cve_id": "CVE-2021-23017",
+      "description": "Nginx resolver off-by-one vulnerability.",
+      "severity": "HIGH",
+      "cvss_score": 7.8,
+      "confidence": "medium"
+    },
+    {
+      "keywords": ["apache", "httpd", "apache-coyote"],
+      "port": [80, 443, 8080, 8443],
+      "cve_id": "CVE-2021-41773",
+      "description": "Apache path traversal and file disclosure issue.",
+      "severity": "HIGH",
+      "cvss_score": 7.5,
+      "confidence": "medium"
+    },
+    {
+      "keywords": ["php"],
+      "port": 80,
+      "cve_id": "CVE-2019-11043",
+      "description": "PHP-FPM remote code execution vulnerability.",
+      "severity": "CRITICAL",
+      "cvss_score": 9.8,
+      "confidence": "medium"
+    },
+    {
+      "keywords": ["wordpress"],
+      "port": 80,
+      "cve_id": "CVE-2024-27956",
+      "description": "WordPress plugin ecosystem vulnerability placeholder mapping.",
+      "severity": "MEDIUM",
+      "cvss_score": 6.5,
+      "confidence": "low"
+    }
+  ]
+}
