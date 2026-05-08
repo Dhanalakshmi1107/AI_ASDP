@@ -208,24 +208,6 @@ For each host:
 
 ---
 
-## Running Tests
-
-```bash
-source myvenv/bin/activate
-python -m pytest tests/ -v
-```
-
-80 tests across 4 files:
-
-| File | Tests | Coverage |
-|---|---|---|
-| `test_parsers.py` | 39 | nmap, sslscan, whatweb, WAF, HTTP signal parsers |
-| `test_schema_utils.py` | 21 | Master schema validation, coercion edge cases |
-| `test_cve_service.py` | 14 | CVE enrichment, CVSS parsing, local/NVD fallback |
-| `test_org_scan.py` | 6 | Organization mode subdomain pipeline |
-
----
-
 ## Project Structure
 
 ```
